@@ -1,6 +1,9 @@
+import getQueryParamURL from '@utils/getQueryParamURL'
+
+const token = process.env.NEXT_PUBLIC_TINYBIRD_ADMIN_TOKEN
 export default async function handler(req, res) {
-    let { pipe, token, page_size } = JSON.parse(req.body)
-    let tinyRes = await fetch(`https://api.tinybird.co/v0/pipes/${pipe}?token=${token}&page_size=${page_size}`)
+    let params = { ...JSON.parse(req.body), token: token }
+    let tinyRes = await fetch(getQueryParamURL(`https://api.tinybird.co/v0/pipes/${params.pipe}`, params))
     let result = await tinyRes.json()
     res.status(200).json({ data: result.data, stats: result.statistics })
 }
