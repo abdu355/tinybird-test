@@ -2,6 +2,7 @@ import React from 'react'
 import Head from 'next/head'
 import styles from '@styles/Home.module.css'
 import IOChart from '@components/charts/IOChart'
+import OrdersChart from '@components/charts/OrdersChart'
 
 const Home = () => {
   return (
@@ -12,7 +13,8 @@ const Home = () => {
       </Head>
       <main >
         <h1> Charts </h1>
-        <IOChart />
+        {/* <IOChart /> */}
+        <OrdersChart />
       </main>
     </div>
   )

@@ -9,49 +9,52 @@ if (typeof Highcharts === 'object') {
     HighchartsExporting(Highcharts)
 }
 
-export default function IOChart() {
+export default function OrdersChart() {
     const {
         data,
         stats,
         isLoading,
         isError } = useTinybird({
-            pipe: 'fin_data_by_tag.json',
-            page_size: '100'
+            pipe: 'food_demand_data_1259_pipe_4198.json',
         })
 
     if (isError) return <div>Chart failed to load. <br />{isError ? `Reason: ${isError}` : ""} </div>
     if (isLoading) return <div>Chart is loading...</div>
 
-
     const options = {
         chart: {
-            type: 'column',
+            type: 'line',
             zoomType: 'x'
         },
         title: {
-            text: 'IO Chart'
+            text: 'Orders By Week'
         },
         credits: {
             enabled: false
         },
         xAxis: {
-            type: "datetime",
-            labels: {
-                format: '{value:%Y-%m-%d}'
-            }
+            title: 'Week'
         },
         yAxis: {
             title: {
-                text: 'AED'
+                text: 'Number of orders'
             }
         },
-        series: [{
-            name: 'inflow',
-            data: data?.map(i => [Date.parse(i.date), i.inflow])
-        }, {
-            name: 'outflow',
-            data: data?.map(i => [Date.parse(i.date), i.outflow])
-        }],
+        plotOptions: {
+            series: {
+                label: {
+                    connectorAllowed: false
+                },
+                pointStart: 1
+            }
+        },
+
+        series: [
+            {
+                name: "Total Orders",
+                data: data?.map(i => [i.week, i.num_orders])
+            }
+        ],
         responsive: {
             rules: [{
                 condition: {
