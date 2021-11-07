@@ -13,7 +13,7 @@ const Home = () => {
       </Head>
       <main >
         <h1> Charts </h1>
-        {/* <IOChart /> */}
+        <IOChart />
         <OrdersChart />
       </main>
     </div>

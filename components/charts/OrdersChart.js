@@ -16,6 +16,7 @@ export default function OrdersChart() {
         isLoading,
         isError } = useTinybird({
             pipe: 'food_demand_data_1259_pipe_4198.json',
+            params: {}
         })
 
     if (isError) return <div>Chart failed to load. <br />{isError ? `Reason: ${isError}` : ""} </div>

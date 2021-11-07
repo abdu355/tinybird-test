@@ -16,7 +16,7 @@ export default function IOChart() {
         isLoading,
         isError } = useTinybird({
             pipe: 'fin_data_by_tag.json',
-            page_size: '100'
+            params: { page_size: '100' }
         })
 
     if (isError) return <div>Chart failed to load. <br />{isError ? `Reason: ${isError}` : ""} </div>
